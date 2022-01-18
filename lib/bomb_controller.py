@@ -78,8 +78,7 @@ def rest_all():
         close_hero_menu()
 
 
-def common_work(all_hero_count=15):
-    open_hero_menu()
+def locate_work_btn():
     work_btn = pyautogui.locateAllOnScreen(os.path.join(
         "asset_matching", "workBtnNotActive.PNG"), confidence=0.865)
     first_work_btn_ypos = None
@@ -89,22 +88,65 @@ def common_work(all_hero_count=15):
             first_work_btn_ypos = pos.top + (pos.width / 2)
             work_btn_xpos = pos.left + (pos.width / 2)
         last_work_btn_ypos = pos.top + (pos.width / 2)
+    return [work_btn_xpos, first_work_btn_ypos, last_work_btn_ypos]
 
+
+def scroll_hero_page(xpos_from, xpos_to, ypos_from, ypos_to, speed=1.15):
+    pyautogui.moveTo(xpos_from, ypos_from)
+    pyautogui.dragTo(xpos_to, ypos_to,
+                     speed, button='left')
+
+
+def get_hero_rarity_pos(rarity='common'):
+    rarity_label_file_name = ''
+    confidence_rate = 0
+    if rarity == 'common':
+        rarity_label_file_name = 'commonLabelComb.PNG'
+        confidence_rate = 0.9
+    elif rarity == 'rare':
+        rarity_label_file_name = 'rareLabel.PNG'
+        confidence_rate = 0.975
+    elif rarity == 'superrare':
+        rarity_label_file_name = 'superRareLabel.PNG'
+        confidence_rate = 0.97
+    else:
+        rarity_label_file_name = 'commonLabelComb.PNG'
+        confidence_rate = 0.9
+    # print(rarity_label_file_name, confidence_rate)
+    ret_pos = (list(pyautogui.locateAllOnScreen(os.path.join(
+        "asset_matching", rarity_label_file_name), confidence=confidence_rate)))
+    # print(ret_pos)
+    return ret_pos
+
+
+def wake_hero(all_hero_count=15, hero_rarity=['all']):
+    if 'all' in hero_rarity:
+        work_all()
+        return
+    open_hero_menu()
+    print('>> Process: Wake hero_rarity Up')
+    [work_btn_xpos, first_work_btn_ypos, last_work_btn_ypos] = locate_work_btn()
     loop_scroll_count = math.ceil(all_hero_count/5)
+
     for i in range(0, loop_scroll_count):
-        common_label_list = list(pyautogui.locateAllOnScreen(os.path.join(
-            "asset_matching", "commonLabelComb.PNG"), confidence=0.9))
-        # print(common_label_list)
-        for index, pos in enumerate(common_label_list):
+        hero_pos = []
+        for e_rarity in hero_rarity:
+            hero_pos += get_hero_rarity_pos(e_rarity)
+
+        def sortTop(e):
+            return e.top
+        hero_pos.sort(key=sortTop)
+
+        for index, pos in enumerate(hero_pos):
             x = work_btn_xpos
             y = pos.top
             pyautogui.moveTo(x, y)
-            sleep(0.1)
+            sleep(0.05)
             pyautogui.click()
-            sleep(0.2)
+            sleep(0.5)
         if loop_scroll_count-1 != i:
-            pyautogui.moveTo(work_btn_xpos, last_work_btn_ypos)
-            pyautogui.dragTo(work_btn_xpos, first_work_btn_ypos,
-                             1.2, button='left')
+            scroll_hero_page(work_btn_xpos, work_btn_xpos,
+                             last_work_btn_ypos, first_work_btn_ypos)
             sleep(3.5)
     close_hero_menu()
+    sleep(2)
