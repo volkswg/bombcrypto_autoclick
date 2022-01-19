@@ -16,7 +16,7 @@ def re_enter_map():
     back_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "backToMenuBtn.PNG"))
     pyautogui.click(back_btn)
-    sleep(0.3)
+    sleep(0.2)
     enter_hunting()
 
 
