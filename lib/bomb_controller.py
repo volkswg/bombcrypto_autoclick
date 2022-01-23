@@ -70,11 +70,11 @@ def rest_all():
     open_hero_menu()
     print('>> Process: Rest All')
 
-    work_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
+    rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "restAllBtn.PNG"))
-    print(work_all_btn)
-    if work_all_btn is not None:
-        pyautogui.moveTo(work_all_btn)
+    # print(rest_all_btn)
+    if rest_all_btn is not None:
+        pyautogui.moveTo(rest_all_btn)
         sleep(0.1)
         pyautogui.click()
         close_hero_menu()
@@ -152,3 +152,17 @@ def wake_hero(all_hero_count=15, hero_rarity=['all']):
             sleep(3.5)
     close_hero_menu()
     sleep(2)
+
+
+def check_all_rest():
+    print('>> Checking: All Hero Rest')
+    open_hero_menu()
+    rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
+        "asset_matching", "restAllBtn.PNG"))
+    close_hero_menu()
+    if rest_all_btn is not None:
+        # print('>> Checking: Not All Rest')
+        return False
+    else:
+        # print('>> Checking: All Rest')
+        return True
