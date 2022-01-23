@@ -31,7 +31,12 @@ def capture_screen():
     img2 = ImageGrab.grab(bbox=(0, 0, 850, 700))  # x, y, w, h
     print("capture 2")
     error = compare_image(img1, img2)
-    print(error)
+    if error < 10:
+        print(error, 'All Rest')
+        return 'all rest'
+    else:
+        print(error)
+        return 'wait'
 
     # frame = cv2.cvtColor(img_np, cv2.COLOR_BGR2GRAY)
     # cv2.imshow("frame", frame)
