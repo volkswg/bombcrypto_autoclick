@@ -30,7 +30,7 @@ def open_hero_menu():
     pyautogui.moveTo(x=open_menu_btn.x, y=open_menu_btn.y+2)
     pyautogui.click()
 
-    sleep(2.8)
+    sleep(1.7)
     hero_icon_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "heroIcon.PNG"), confidence=0.85)
     pyautogui.moveTo(hero_icon_btn)
@@ -77,7 +77,8 @@ def rest_all():
         pyautogui.moveTo(rest_all_btn)
         sleep(0.1)
         pyautogui.click()
-        close_hero_menu()
+        sleep(0.2)
+    close_hero_menu()
 
 
 def locate_work_btn():
@@ -104,7 +105,7 @@ def get_hero_rarity_pos(rarity='common'):
     confidence_rate = 0
     if rarity == 'common':
         rarity_label_file_name = 'commonLabelComb.PNG'
-        confidence_rate = 0.9
+        confidence_rate = 0.91
     elif rarity == 'rare':
         rarity_label_file_name = 'rareLabel.PNG'
         confidence_rate = 0.975
@@ -117,7 +118,6 @@ def get_hero_rarity_pos(rarity='common'):
     # print(rarity_label_file_name, confidence_rate)
     ret_pos = (list(pyautogui.locateAllOnScreen(os.path.join(
         "asset_matching", rarity_label_file_name), confidence=confidence_rate)))
-    # print(ret_pos)
     return ret_pos
 
 
