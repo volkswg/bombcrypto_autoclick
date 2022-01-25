@@ -10,7 +10,9 @@ def enter_hunting():
         "asset_matching", "enterHuntingMap.PNG"))
     if treasure_hunt_btn is not None:
         print('>> Process: Enter Treasure Hunt')
-        pyautogui.click(treasure_hunt_btn)
+        pyautogui.moveTo(treasure_hunt_btn)
+        sleep(0.2)
+        pyautogui.click()
 
 
 def re_enter_map():
