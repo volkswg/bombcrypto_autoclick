@@ -175,3 +175,17 @@ def check_all_rest():
     else:
         # print('>> Checking: All Rest')
         return True
+
+
+def check_error_occur():
+    ct = datetime.datetime.now()
+    print(ct, '>> Checking: Error Occur')
+    error_dialog = pyautogui.locateCenterOnScreen(os.path.join(
+        "asset_matching", "errorDialog.PNG"))
+
+    if error_dialog is not None:
+        # print('>> Checking: Not All Rest')
+        return True
+    else:
+        # print('>> Checking: All Rest')
+        return False
