@@ -2,6 +2,7 @@ from time import sleep
 import pyautogui
 import os
 import math
+import datetime
 
 
 def enter_hunting():
@@ -13,6 +14,8 @@ def enter_hunting():
 
 
 def re_enter_map():
+    ct = datetime.datetime.now()
+    print(ct, '>> Process: Re-Enter Treasure Hunt')
     back_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "backToMenuBtn.PNG"))
     pyautogui.click(back_btn)
@@ -21,7 +24,8 @@ def re_enter_map():
 
 
 def open_hero_menu():
-    print('>> Process: Open Hero Menu')
+    ct = datetime.datetime.now()
+    print(ct, '>> Process: Open Hero Menu')
     open_menu_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "openMenuTab.PNG"), confidence=0.50)
     while open_menu_btn is None:
@@ -39,7 +43,8 @@ def open_hero_menu():
 
 
 def close_hero_menu():
-    print('>> Process: Close Hero Menu')
+    ct = datetime.datetime.now()
+    print(ct, '>> Process: Close Hero Menu')
     close_menu_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "closeHeroBtn.PNG"))
 
@@ -54,7 +59,8 @@ def close_hero_menu():
 
 def work_all():
     open_hero_menu()
-    print('>> Process: Work All')
+    ct = datetime.datetime.now()
+    print(ct, '>> Process: Work All')
 
     work_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "workAllBtn.PNG"))
@@ -68,7 +74,8 @@ def work_all():
 
 def rest_all():
     open_hero_menu()
-    print('>> Process: Rest All')
+    ct = datetime.datetime.now()
+    print(ct, '>> Process: Rest All')
 
     rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "restAllBtn.PNG"))
@@ -126,7 +133,8 @@ def wake_hero(all_hero_count=15, hero_rarity=['all']):
         work_all()
         return
     open_hero_menu()
-    print('>> Process: Wake hero_rarity Up')
+    ct = datetime.datetime.now()
+    print(ct, '>> Process: Wake hero_rarity Up')
     [work_btn_xpos, first_work_btn_ypos, last_work_btn_ypos] = locate_work_btn()
     loop_scroll_count = math.ceil(all_hero_count/5)
 
@@ -155,7 +163,8 @@ def wake_hero(all_hero_count=15, hero_rarity=['all']):
 
 
 def check_all_rest():
-    print('>> Checking: All Hero Rest')
+    ct = datetime.datetime.now()
+    print(ct, '>> Checking: All Hero Rest')
     open_hero_menu()
     rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "restAllBtn.PNG"))
