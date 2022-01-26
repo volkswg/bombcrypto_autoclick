@@ -36,12 +36,18 @@ def open_hero_menu():
     pyautogui.moveTo(x=open_menu_btn.x, y=open_menu_btn.y+2)
     pyautogui.click()
 
-    sleep(1.7)
+    sleep(1.2)
     hero_icon_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "heroIcon.PNG"), confidence=0.85)
     pyautogui.moveTo(hero_icon_btn)
     pyautogui.click()
-    sleep(2)
+
+    # check open heroes menu success
+    e_work_btn = None
+    while e_work_btn is None:
+        e_work_btn = pyautogui.locateAllOnScreen(os.path.join(
+            "asset_matching", "workBtnNotActive.PNG"), confidence=0.865)
+    sleep(0.5)
 
 
 def close_hero_menu():
