@@ -21,9 +21,15 @@ def re_enter_map():
     print(ct, '>> Process: Re-Enter Treasure Hunt')
     back_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "backToMenuBtn.PNG"))
-    pyautogui.click(back_btn)
-    sleep(0.2)
-    enter_hunting()
+    while back_btn is None:
+        back_btn = pyautogui.locateCenterOnScreen(os.path.join(
+            "asset_matching", "backToMenuBtn.PNG"))
+    if back_btn is not None:
+        pyautogui.moveTo(back_btn)
+        sleep(0.2)
+        pyautogui.click()
+        sleep(1)
+        enter_hunting()
 
 
 def open_hero_menu():
