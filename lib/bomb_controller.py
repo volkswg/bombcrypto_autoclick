@@ -3,6 +3,7 @@ import pyautogui
 import os
 import math
 import datetime
+from lib.process_logging import print_log
 
 
 def enter_hunting():
@@ -26,8 +27,7 @@ def re_enter_map():
 
 
 def open_hero_menu():
-    ct = datetime.datetime.now()
-    print(ct, '>> Process: Open Hero Menu')
+    print_log('Menu', 'Open Hero Menu')
     open_menu_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "openMenuTab.PNG"), confidence=0.50)
     while open_menu_btn is None:
@@ -45,8 +45,7 @@ def open_hero_menu():
 
 
 def close_hero_menu():
-    ct = datetime.datetime.now()
-    print(ct, '>> Process: Close Hero Menu')
+    print_log('Menu', 'Close Hero Menu')
     close_menu_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "closeHeroBtn.PNG"))
 
@@ -76,8 +75,7 @@ def work_all():
 
 def rest_all():
     open_hero_menu()
-    ct = datetime.datetime.now()
-    print(ct, '>> Process: Rest All')
+    print_log('Heroes', 'Rest All')
 
     rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "restAllBtn.PNG"))
@@ -135,8 +133,8 @@ def wake_hero(all_hero_count=15, hero_rarity=['all']):
         work_all()
         return
     open_hero_menu()
-    ct = datetime.datetime.now()
-    print(ct, '>> Process: Wake hero_rarity Up')
+    hero_str_log = ','.join(hero_rarity)
+    print_log('Heroes', f'Wake {hero_str_log} Up')
     [work_btn_xpos, first_work_btn_ypos, last_work_btn_ypos] = locate_work_btn()
     loop_scroll_count = math.ceil(all_hero_count/5)
 
@@ -165,8 +163,7 @@ def wake_hero(all_hero_count=15, hero_rarity=['all']):
 
 
 def check_all_rest():
-    ct = datetime.datetime.now()
-    print(ct, '>> Checking: All Hero Rest')
+    print_log('Heroes', 'Checking All Heroes Rest')
     open_hero_menu()
     rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "restAllBtn.PNG"))
@@ -180,8 +177,7 @@ def check_all_rest():
 
 
 def check_error_occur():
-    ct = datetime.datetime.now()
-    print(ct, '>> Checking: Error Occur')
+    print_log('System', 'Checking Error Occur')
     error_dialog = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "errorDialog.PNG"))
 
