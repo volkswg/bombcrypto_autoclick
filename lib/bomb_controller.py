@@ -17,8 +17,7 @@ def enter_hunting():
 
 
 def re_enter_map():
-    ct = datetime.datetime.now()
-    print(ct, '>> Process: Re-Enter Treasure Hunt')
+    print_log('Menu', 'Re-Enter Treasure Hunt')
     back_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "backToMenuBtn.PNG"))
     while back_btn is None:
