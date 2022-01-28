@@ -42,13 +42,13 @@ def get_hero_rarity_pos(rarity='common'):
     confidence_rate = 0
     if rarity == 'common':
         rarity_label_file_name = 'commonLabelComb.PNG'
-        confidence_rate = 0.9115
+        confidence_rate = 0.9117
     elif rarity == 'rare':
         rarity_label_file_name = 'rareLabel.PNG'
-        confidence_rate = 0.979
+        confidence_rate = 0.978
     elif rarity == 'superrare':
         rarity_label_file_name = 'superRareLabel.PNG'
-        confidence_rate = 0.967
+        confidence_rate = 0.968
     else:
         rarity_label_file_name = 'commonLabelComb.PNG'
         confidence_rate = 0.9
@@ -196,7 +196,7 @@ def check_all_rest():
 def check_error_occur():
     # print_log('System', 'Checking Error Occur')
     error_dialog = pyautogui.locateCenterOnScreen(os.path.join(
-        "asset_matching", "errorDialog.PNG"))
+        "asset_matching", "errorDialog.PNG"), confidence=0.9)
 
     if error_dialog is not None:
         error_handling()
