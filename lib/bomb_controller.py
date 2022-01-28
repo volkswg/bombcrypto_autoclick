@@ -74,39 +74,30 @@ def re_enter_map():
     print_log('Menu', 'Re-Enter Treasure Hunt')
     back_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "backToMenuBtn.PNG"))
-    while back_btn is None:
-        back_btn = pyautogui.locateCenterOnScreen(os.path.join(
-            "asset_matching", "backToMenuBtn.PNG"))
-    if back_btn is not None:
-        pyautogui.moveTo(back_btn)
-        sleep(0.2)
-        pyautogui.click()
-        sleep(1)
-        enter_hunting()
+    back_btn = wait_until_found("backToMenuBtn.PNG")
+
+    pyautogui.moveTo(back_btn)
+    sleep(0.1)
+    pyautogui.click()
+    sleep(1)
+    enter_hunting()
 
 
 def open_hero_menu():
     print_log('Menu', 'Open Hero Menu')
-    open_menu_btn = pyautogui.locateCenterOnScreen(os.path.join(
-        "asset_matching", "openMenuTab.PNG"), confidence=0.50)
-    while open_menu_btn is None:
-        open_menu_btn = pyautogui.locateCenterOnScreen(os.path.join(
-            "asset_matching", "openMenuTab.PNG"), confidence=0.50)
+    open_menu_btn = wait_until_found('openMenuTab.PNG', 0.5)
     pyautogui.moveTo(x=open_menu_btn.x, y=open_menu_btn.y+2)
+    check_error_occur()
     pyautogui.click()
 
-    sleep(1.2)
-    hero_icon_btn = pyautogui.locateCenterOnScreen(os.path.join(
-        "asset_matching", "heroIcon.PNG"), confidence=0.85)
+    hero_icon_btn = wait_until_found('heroIcon.PNG', 0.85)
     pyautogui.moveTo(hero_icon_btn)
+    check_error_occur()
     pyautogui.click()
 
     # check open heroes menu success
-    e_work_btn = None
-    while e_work_btn is None:
-        e_work_btn = pyautogui.locateAllOnScreen(os.path.join(
-            "asset_matching", "workBtnNotActive.PNG"), confidence=0.865)
-    sleep(0.5)
+    print_log('Menu', 'Checking Open Heroes Success')
+    wait_until_found("workBtnNotActive.PNG", 0.865)
 
 
 def close_hero_menu():
