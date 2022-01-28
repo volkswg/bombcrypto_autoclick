@@ -72,9 +72,7 @@ def enter_hunting():
 
 def re_enter_map():
     print_log('Menu', 'Re-Enter Treasure Hunt')
-    back_btn = pyautogui.locateCenterOnScreen(os.path.join(
-        "asset_matching", "backToMenuBtn.PNG"))
-    back_btn = wait_until_found("backToMenuBtn.PNG")
+    back_btn = wait_until_found("backToMenuBtn.PNG", 0.9)
 
     pyautogui.moveTo(back_btn)
     sleep(0.1)
