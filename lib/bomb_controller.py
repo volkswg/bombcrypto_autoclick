@@ -194,13 +194,44 @@ def check_all_rest():
 
 
 def check_error_occur():
-    print_log('System', 'Checking Error Occur')
+    # print_log('System', 'Checking Error Occur')
     error_dialog = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "errorDialog.PNG"))
 
     if error_dialog is not None:
-        # print('>> Checking: Not All Rest')
+        error_handling()
         return True
     else:
         # print('>> Checking: All Rest')
         return False
+
+
+def error_handling():
+    print_log('Error', 'Error Occur')
+    print_log('Menu', 'Back to login page')
+    error_dialog = pyautogui.locateCenterOnScreen(os.path.join(
+        "asset_matching", "errorDialog.PNG"))
+    pyautogui.moveTo(error_dialog)
+    sleep(0.1)
+    pyautogui.click()
+    print_log('System', 'Click Ok')
+    sleep(1)
+
+    print_log('System', 'Find Connect Wallet')
+    connect_wallet_btn = wait_until_found("connectWallet.PNG", 0.8)
+    print_log('System', 'Click Connect Wallet')
+    pyautogui.moveTo(connect_wallet_btn)
+    sleep(0.1)
+    pyautogui.click()
+    sleep(7)
+
+    print_log('System', 'Find Metamask Sign')
+    metamask_login_btn = wait_until_found("metamaskSignin.PNG", 0.9)
+    pyautogui.moveTo(metamask_login_btn)
+    sleep(0.1)
+    pyautogui.click()
+
+    treasure_hunt_btn = wait_until_found("enterHuntingMap.PNG", 0.98)
+    pyautogui.moveTo(treasure_hunt_btn)
+    sleep(0.1)
+    pyautogui.click()
