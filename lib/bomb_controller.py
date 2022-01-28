@@ -5,6 +5,60 @@ import math
 import datetime
 from lib.process_logging import print_log
 
+# for private use ===========================================================================
+
+
+def wait_until_found(image_name, confidence=1):
+    obj_pos = None
+    while obj_pos is None:
+        check_error_occur()
+        obj_pos = pyautogui.locateCenterOnScreen(os.path.join(
+            "asset_matching", image_name), confidence=confidence)
+        print('obj_pos', image_name, obj_pos)
+    return obj_pos
+
+
+def locate_work_btn():
+    work_btn = pyautogui.locateAllOnScreen(os.path.join(
+        "asset_matching", "workBtnNotActive.PNG"), confidence=0.865)
+    first_work_btn_ypos = None
+    last_work_btn_ypos = None
+    for index, pos in enumerate(work_btn):
+        if index == 0:
+            first_work_btn_ypos = pos.top + (pos.width / 2)
+            work_btn_xpos = pos.left + (pos.width / 2)
+        last_work_btn_ypos = pos.top + (pos.width / 2)
+    return [work_btn_xpos, first_work_btn_ypos, last_work_btn_ypos]
+
+
+def scroll_hero_page(xpos_from, xpos_to, ypos_from, ypos_to, speed=1.15):
+    pyautogui.moveTo(xpos_from, ypos_from)
+    pyautogui.dragTo(xpos_to, ypos_to,
+                     speed, button='left')
+
+
+def get_hero_rarity_pos(rarity='common'):
+    rarity_label_file_name = ''
+    confidence_rate = 0
+    if rarity == 'common':
+        rarity_label_file_name = 'commonLabelComb.PNG'
+        confidence_rate = 0.91
+    elif rarity == 'rare':
+        rarity_label_file_name = 'rareLabel.PNG'
+        confidence_rate = 0.975
+    elif rarity == 'superrare':
+        rarity_label_file_name = 'superRareLabel.PNG'
+        confidence_rate = 0.97
+    else:
+        rarity_label_file_name = 'commonLabelComb.PNG'
+        confidence_rate = 0.9
+    # print(rarity_label_file_name, confidence_rate)
+    ret_pos = (list(pyautogui.locateAllOnScreen(os.path.join(
+        "asset_matching", rarity_label_file_name), confidence=confidence_rate)))
+    return ret_pos
+
+
+# for private use ===========================================================================
 
 def enter_hunting():
     treasure_hunt_btn = pyautogui.locateCenterOnScreen(os.path.join(
@@ -97,46 +151,6 @@ def rest_all():
         pyautogui.click()
         sleep(0.2)
     close_hero_menu()
-
-
-def locate_work_btn():
-    work_btn = pyautogui.locateAllOnScreen(os.path.join(
-        "asset_matching", "workBtnNotActive.PNG"), confidence=0.865)
-    first_work_btn_ypos = None
-    last_work_btn_ypos = None
-    for index, pos in enumerate(work_btn):
-        if index == 0:
-            first_work_btn_ypos = pos.top + (pos.width / 2)
-            work_btn_xpos = pos.left + (pos.width / 2)
-        last_work_btn_ypos = pos.top + (pos.width / 2)
-    return [work_btn_xpos, first_work_btn_ypos, last_work_btn_ypos]
-
-
-def scroll_hero_page(xpos_from, xpos_to, ypos_from, ypos_to, speed=1.15):
-    pyautogui.moveTo(xpos_from, ypos_from)
-    pyautogui.dragTo(xpos_to, ypos_to,
-                     speed, button='left')
-
-
-def get_hero_rarity_pos(rarity='common'):
-    rarity_label_file_name = ''
-    confidence_rate = 0
-    if rarity == 'common':
-        rarity_label_file_name = 'commonLabelComb.PNG'
-        confidence_rate = 0.91
-    elif rarity == 'rare':
-        rarity_label_file_name = 'rareLabel.PNG'
-        confidence_rate = 0.975
-    elif rarity == 'superrare':
-        rarity_label_file_name = 'superRareLabel.PNG'
-        confidence_rate = 0.97
-    else:
-        rarity_label_file_name = 'commonLabelComb.PNG'
-        confidence_rate = 0.9
-    # print(rarity_label_file_name, confidence_rate)
-    ret_pos = (list(pyautogui.locateAllOnScreen(os.path.join(
-        "asset_matching", rarity_label_file_name), confidence=confidence_rate)))
-    return ret_pos
 
 
 def wake_hero(all_hero_count=15, hero_rarity=['all']):
