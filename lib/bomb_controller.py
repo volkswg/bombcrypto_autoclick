@@ -14,7 +14,7 @@ def wait_until_found(image_name, confidence=1):
         check_error_occur()
         obj_pos = pyautogui.locateCenterOnScreen(os.path.join(
             "asset_matching", image_name), confidence=confidence)
-        print('obj_pos', image_name, obj_pos)
+        # print('obj_pos', image_name, obj_pos)
     return obj_pos
 
 
@@ -42,13 +42,13 @@ def get_hero_rarity_pos(rarity='common'):
     confidence_rate = 0
     if rarity == 'common':
         rarity_label_file_name = 'commonLabelComb.PNG'
-        confidence_rate = 0.91
+        confidence_rate = 0.9115
     elif rarity == 'rare':
         rarity_label_file_name = 'rareLabel.PNG'
-        confidence_rate = 0.975
+        confidence_rate = 0.979
     elif rarity == 'superrare':
         rarity_label_file_name = 'superRareLabel.PNG'
-        confidence_rate = 0.97
+        confidence_rate = 0.967
     else:
         rarity_label_file_name = 'commonLabelComb.PNG'
         confidence_rate = 0.9
@@ -62,7 +62,7 @@ def get_hero_rarity_pos(rarity='common'):
 
 def enter_hunting():
     treasure_hunt_btn = pyautogui.locateCenterOnScreen(os.path.join(
-        "asset_matching", "enterHuntingMap.PNG"))
+        "asset_matching", "enterHuntingMap.PNG"), confidence=0.9)
     if treasure_hunt_btn is not None:
         print('>> Process: Enter Treasure Hunt')
         pyautogui.moveTo(treasure_hunt_btn)
@@ -87,6 +87,7 @@ def open_hero_menu():
     pyautogui.moveTo(x=open_menu_btn.x, y=open_menu_btn.y+2)
     check_error_occur()
     pyautogui.click()
+    sleep(0.8)
 
     hero_icon_btn = wait_until_found('heroIcon.PNG', 0.85)
     pyautogui.moveTo(hero_icon_btn)
@@ -96,18 +97,19 @@ def open_hero_menu():
     # check open heroes menu success
     print_log('Menu', 'Checking Open Heroes Success')
     wait_until_found("workBtnNotActive.PNG", 0.865)
+    sleep(0.8)
 
 
 def close_hero_menu():
     print_log('Menu', 'Close Hero Menu')
     close_menu_btn = pyautogui.locateCenterOnScreen(os.path.join(
-        "asset_matching", "closeHeroBtn.PNG"))
+        "asset_matching", "closeHeroBtn.PNG"), confidence=0.9)
 
     # print('click 1')
     pyautogui.moveTo(close_menu_btn)
     sleep(0.2)
     pyautogui.click()
-    sleep(2)
+    sleep(2.5)
     # print('click 2')
     pyautogui.click(close_menu_btn)
 
@@ -132,8 +134,8 @@ def rest_all():
     print_log('Heroes', 'Rest All')
 
     rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
-        "asset_matching", "restAllBtn.PNG"))
-    # print(rest_all_btn)
+        "asset_matching", "restAllBtn.PNG"), confidence=0.9)
+    print(rest_all_btn)
     if rest_all_btn is not None:
         pyautogui.moveTo(rest_all_btn)
         sleep(0.1)
@@ -180,7 +182,8 @@ def check_all_rest():
     print_log('Heroes', 'Checking All Heroes Rest')
     open_hero_menu()
     rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
-        "asset_matching", "restAllBtn.PNG"))
+        "asset_matching", "restAllBtn.PNG"), confidence=0.90)
+    print('rest_all_btn', rest_all_btn)
     close_hero_menu()
     if rest_all_btn is not None:
         # print('>> Checking: Not All Rest')
