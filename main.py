@@ -93,7 +93,6 @@ def main():
     bombcrypto_wins = screen_arrange.get_bomb_wins_list()
     screen_arrange.arrange_bomb_wins(bombcrypto_wins)
     bomb_controller.enter_hunting()
-    bomb_controller.rest_all()
     bomb_controller.wake_hero(all_hero_count=15, hero_rarity=['common'])
     common_started_flag = True
     while True:
