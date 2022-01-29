@@ -160,8 +160,22 @@ def wake_hero(all_hero_count=15, hero_rarity=['all']):
         work_all()
         return
     open_hero_menu()
-    hero_str_log = ','.join(hero_rarity)
-    print_log('Heroes', f'Wake {hero_str_log} Up')
+
+    # rest all heroes before wake them up =============
+    print_log('Heroes', 'Rest All')
+    rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
+        "asset_matching", "restAllBtn.PNG"), confidence=0.9)
+    if rest_all_btn is not None:
+        print_log('System', 'Click Rest All Button')
+
+        pyautogui.moveTo(rest_all_btn)
+        sleep(0.1)
+        pyautogui.click()
+        sleep(0.2)
+    else:
+        print_log('System', 'Rest All Button Not Found')
+    # rest all heroes before wake them up =============
+
     [work_btn_xpos, first_work_btn_ypos, last_work_btn_ypos] = locate_work_btn()
     loop_scroll_count = math.ceil(all_hero_count/5)
 
