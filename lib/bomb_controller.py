@@ -58,6 +58,16 @@ def get_hero_rarity_pos(rarity='common'):
     return ret_pos
 
 
+def remove_dup_top_value(pos_list):
+    pos_result = []
+    top_list = []
+    for pos in pos_list:
+        top_val = pos.top
+        if top_val not in top_list:
+            top_list.append(top_val)
+            pos_result.append(pos)
+    return pos_result
+
 # for private use ===========================================================================
 
 def enter_hunting():
@@ -162,7 +172,7 @@ def wake_hero(all_hero_count=15, hero_rarity=['all']):
         def sortTop(e):
             return e.top
         hero_pos.sort(key=sortTop)
-
+        hero_pos = remove_dup_top_value(hero_pos)
         for index, pos in enumerate(hero_pos):
             x = work_btn_xpos
             y = pos.top
