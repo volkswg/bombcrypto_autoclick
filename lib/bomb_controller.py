@@ -42,13 +42,13 @@ def get_hero_rarity_pos(rarity='common'):
     confidence_rate = 0
     if rarity == 'common':
         rarity_label_file_name = 'commonLabelComb.PNG'
-        confidence_rate = 0.9117
+        confidence_rate = 0.9118
     elif rarity == 'rare':
         rarity_label_file_name = 'rareLabel.PNG'
-        confidence_rate = 0.978
+        confidence_rate = 0.97
     elif rarity == 'superrare':
         rarity_label_file_name = 'superRareLabel.PNG'
-        confidence_rate = 0.968
+        confidence_rate = 0.965
     else:
         rarity_label_file_name = 'commonLabelComb.PNG'
         confidence_rate = 0.9
@@ -69,6 +69,7 @@ def remove_dup_top_value(pos_list):
     return pos_result
 
 # for private use ===========================================================================
+
 
 def enter_hunting():
     treasure_hunt_btn = pyautogui.locateCenterOnScreen(os.path.join(
