@@ -156,6 +156,8 @@ def rest_all():
 
 
 def wake_hero(all_hero_count=15, hero_rarity=['all']):
+    hero_str_log = ','.join(hero_rarity)
+    print_log('Heroes', f'Wake {hero_str_log} Up')
     if 'all' in hero_rarity:
         work_all()
         return
