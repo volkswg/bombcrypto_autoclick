@@ -210,13 +210,12 @@ def check_all_rest():
     open_hero_menu()
     rest_all_btn = pyautogui.locateCenterOnScreen(os.path.join(
         "asset_matching", "restAllBtn.PNG"), confidence=0.90)
-    print('rest_all_btn', rest_all_btn)
     close_hero_menu()
     if rest_all_btn is not None:
-        # print('>> Checking: Not All Rest')
+        print_log('Heroes', 'Not All Rest')
         return False
     else:
-        # print('>> Checking: All Rest')
+        print_log('Heroes', 'All Rest')
         return True
 
 
