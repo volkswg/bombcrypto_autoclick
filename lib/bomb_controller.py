@@ -3,7 +3,7 @@ import pyautogui
 import os
 import math
 import datetime
-from lib.process_logging import print_log
+from lib.util import print_log
 
 # for private use ===========================================================================
 
