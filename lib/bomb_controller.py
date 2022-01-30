@@ -95,7 +95,7 @@ def re_enter_map():
 def open_hero_menu():
     print_log('Menu', 'Open Hero Menu')
     open_menu_btn = wait_until_found('openMenuTab.PNG', 0.5)
-    pyautogui.moveTo(x=open_menu_btn.x, y=open_menu_btn.y+2)
+    pyautogui.moveTo(x=open_menu_btn.x, y=open_menu_btn.y+5)
     check_error_occur()
     pyautogui.click()
     sleep(0.8)
