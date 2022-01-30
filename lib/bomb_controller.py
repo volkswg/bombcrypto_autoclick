@@ -31,10 +31,10 @@ def locate_work_btn():
     return [work_btn_xpos, first_work_btn_ypos, last_work_btn_ypos]
 
 
-def scroll_hero_page(xpos_from, xpos_to, ypos_from, ypos_to, speed=1.15):
+def scroll_hero_page(xpos_from, xpos_to, ypos_from, ypos_to, duration=1.17):
     pyautogui.moveTo(xpos_from, ypos_from)
     pyautogui.dragTo(xpos_to, ypos_to,
-                     speed, button='left')
+                     duration, button='left')
 
 
 def get_hero_rarity_pos(rarity='common'):
