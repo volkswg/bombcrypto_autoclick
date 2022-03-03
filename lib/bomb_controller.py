@@ -31,7 +31,7 @@ def locate_work_btn():
     return [work_btn_xpos, first_work_btn_ypos, last_work_btn_ypos]
 
 
-def scroll_hero_page(xpos_from, xpos_to, ypos_from, ypos_to, duration=1.17):
+def scroll_hero_page(xpos_from, xpos_to, ypos_from, ypos_to, duration=1.15):
     pyautogui.moveTo(xpos_from, ypos_from)
     pyautogui.dragTo(xpos_to, ypos_to,
                      duration, button='left')
@@ -42,16 +42,16 @@ def get_hero_rarity_pos(rarity='common'):
     confidence_rate = 0
     if rarity == 'common':
         rarity_label_file_name = 'commonLabelComb.PNG'
-        confidence_rate = 0.9118
+        confidence_rate = 0.911
     elif rarity == 'rare':
         rarity_label_file_name = 'rareLabel.PNG'
         confidence_rate = 0.97
     elif rarity == 'superrare':
         rarity_label_file_name = 'superRareLabel.PNG'
-        confidence_rate = 0.965
+        confidence_rate = 0.948
     else:
         rarity_label_file_name = 'commonLabelComb.PNG'
-        confidence_rate = 0.9
+        confidence_rate = 0.88
     # print(rarity_label_file_name, confidence_rate)
     ret_pos = (list(pyautogui.locateAllOnScreen(os.path.join(
         "asset_matching", rarity_label_file_name), confidence=confidence_rate)))
