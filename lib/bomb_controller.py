@@ -261,3 +261,48 @@ def error_handling():
     pyautogui.moveTo(treasure_hunt_btn)
     sleep(0.1)
     pyautogui.click()
+
+
+def full_process_auto(is_restore_stamina, waking_hero_state=0):
+    # waking state
+    # 0 = common
+    # 1 = rare
+    # 2 = super rare
+    resp_obj = {
+        'error': False,
+        'next_state': waking_hero_state,
+        'is_all_rest': False
+    }
+    # check error every event loop
+    bomb_error = check_error_occur()
+    if bomb_error:
+        resp_obj['error'] = True
+        resp_obj['next_state'] = 0
+        return resp_obj
+
+    # check restoring stamina flag
+    if is_restore_stamina:
+        re_enter_map()
+        resp_obj['error'] = False
+        resp_obj['next_state'] = 0
+        return resp_obj
+
+    # check all heroes rest
+    is_all_rest = check_all_rest()
+    if is_all_rest:
+        resp_obj['is_all_rest'] = is_all_rest
+
+        if waking_hero_state == 0:
+            wake_hero(
+                all_hero_count=15, hero_rarity=['common'])
+            resp_obj['next_state'] += 1
+        if waking_hero_state == 1:
+            wake_hero(
+                all_hero_count=15, hero_rarity=['rare'])
+            resp_obj['next_state'] += 1
+        if waking_hero_state == 2:
+            wake_hero(
+                all_hero_count=15, hero_rarity=['superrare'])
+            resp_obj['next_state'] += 1
+
+    return resp_obj
